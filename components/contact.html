@@ -1,0 +1,124 @@
+<section id="contact" class="contact-section">
+    <h2><i class="fas fa-envelope"></i> Contact Me</h2>
+    <p>Have a question or want to work together? Send me a message! 📩</p>
+
+    <form id="contact-form" novalidate>
+        <input type="text" name="name" placeholder="Your Name" required 
+               pattern="^[a-zA-Z\s]{2,50}$" title="Name should be 2-50 letters only">
+        <input type="email" name="email" placeholder="Your Email" required
+               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+               title="Enter a valid email address">
+        <input type="text" name="number" placeholder="Your Phone Number" required
+               pattern="^\+?\d{7,15}$" title="Enter valid phone number (7-15 digits)">
+        <textarea name="message" placeholder="Your Message" required
+                  maxlength="1000"></textarea>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
+</section>
+
+<style>
+.contact-section {
+    padding: 80px 20px;
+    background: #050b18;
+    color: #fff;
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    color: #00ffc8;
+    margin-bottom: 10px;
+}
+
+.contact-section p {
+    font-size: 1rem;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+}
+
+.contact-section form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-section input,
+.contact-section textarea {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #0a0f1f;
+    color: #fff;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.contact-section button {
+    background: #00ffc8;
+    color: #000;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-section button:hover {
+    background: #1d79e9;
+    color: #fff;
+}
+
+/* Input validation focus effect */
+.contact-section input:invalid,
+.contact-section textarea:invalid {
+    border-color: #ff4d6d;
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus {
+    outline: none;
+    border-color: #1d79e9;
+    box-shadow: 0 0 5px #1d79e9;
+}
+</style>
+
+<script>
+// ===========================
+// Contact Form Secure Submission
+// ===========================
+document.getElementById('contact-form')?.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const form = e.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const number = form.number.value.trim();
+    const message = form.message.value.trim();
+
+    // Simple XSS prevention
+    const sanitize = str => str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    if(!name || !email || !number || !message){
+        alert('❌ Please fill all fields correctly!');
+        return;
+    }
+
+    // Prepare safe payload
+    const payload = {
+        name: sanitize(name),
+        email: sanitize(email),
+        number: sanitize(number),
+        message: sanitize(message)
+    };
+
+    console.log('✅ Secure Contact Form Data:', payload);
+
+    // TODO: Send payload to backend via fetch/AJAX securely
+    alert('Message sent successfully! 🎉');
+
+    form.reset();
+});
+</script>

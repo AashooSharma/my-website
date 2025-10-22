@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Projects | Aashoo Sharma</title>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0px;
+        }
+
+        body,
+        input,
+        select,
+        button {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            max-width: 100vw;
+            max-height: 100vh;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            max-width: 100vw;
+            margin: auto;
+        }
+
+        .projects-section h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #1d79e9;
+        }
+
+        .projects-section p {
+            margin-bottom: 20px;
+            color: #ccc;
+            font-size: 1rem;
+        }
+
+        /* Search + Filters */
+        .projects-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: space-between;
+        }
+
+        .projects-filters input[type="text"] {
+            flex: 1;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background: #111;
+            color: #fff;
+        }
+
+        .projects-filters select {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background: #111;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Projects Grid */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: #0a0f1f;
+            color: #fff;
+            border-radius: 10px;
+            max-width: 20vw;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .project-card .project-details {
+            padding: 15px;
+        }
+
+        .project-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            color: #1d79e9;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-card p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .project-card .project-skills {
+            margin-top: 10px;
+        }
+
+        .project-card .project-skills span {
+            /* background: #00ffc8;
+        color: #000;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 6px;
+        margin: 3px 3px 0 0;
+        display: inline-block;
+        font-size: 0.8rem; */
+
+            display: inline-block;
+            background: #1e293b;
+            color: #00ffc8;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 3px;
+            font-size: 0.9rem;
+        }
+
+        .project-card .project-links {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-card .project-links a {
+            text-decoration: none;
+            color: #1d79e9;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+
+        /* Back Button */
+        .back-btn {
+            margin-top: 50px;
+            display: inline-block;
+            background: #00ffc8;
+            color: #000;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1d79e9;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <section id="projects" class="projects-section">
+        <h2><i class="fas fa-laptop-code"></i> All Projects</h2>
+        <p>Explore all my AI, DevOps, Cybersecurity, and IoT projects 👨‍💻</p>
+
+        <!-- Search + Filter -->
+        <div class="projects-filters">
+            <input type="text" id="search-box" placeholder="Search projects by title or description...">
+            <select id="skill-filter">
+                <option value="">Filter by skill</option>
+            </select>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projects-container" class="projects-container"></div>
+
+        <a href="./index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+    </section>
+
+    <script>
+        let projectsData = [];
+
+        fetch('./data/projects.json')
+            .then(res => res.json())
+            .then(projects => {
+                projectsData = projects;
+                populateSkillFilter(projects);
+                renderProjects(projectsData);
+            })
+            .catch(err => console.error('❌ Error loading projects JSON:', err));
+
+        // Format date as "Mon YYYY"
+        const formatDate = dateStr => {
+            if (!dateStr) return 'Present';
+            const [year, month] = dateStr.split('-');
+            const date = new Date(year, month - 1);
+            return date.toLocaleString('default', { month: 'short', year: 'numeric' });
+        };
+
+        // Render projects
+        function renderProjects(projects) {
+            const container = document.getElementById('projects-container');
+            container.innerHTML = '';
+            projects.forEach(project => {
+                const card = document.createElement('div');
+                card.classList.add('project-card');
+
+                card.innerHTML = `
+          <img src="${project.image_paths[0]}" alt="${project.title}">
+          <div class="project-details">
+            <h3><i class="fas fa-folder-open"></i> ${project.title}</h3>
+            <p><strong>Description:</strong> ${project.description}</p>
+            <p><strong>Duration:</strong> ${formatDate(project.start_date)} – ${formatDate(project.end_date)}</p>
+            <div class="project-skills">
+              <strong>Skills:</strong>
+              ${project.skills.map(skill => `<span>${skill}</span>`).join('')}
+            </div>
+            <div class="project-links">
+              ${project.demo_url ? `<a href="${project.demo_url}" target="_blank"><i class="fas fa-external-link-alt"></i> Demo</a>` : ''}
+              ${project.github_repo ? `<a href="${project.github_repo}" target="_blank"><i class="fab fa-github"></i> Code</a>` : ''}
+            </div>
+          </div>
+        `;
+                container.appendChild(card);
+            });
+        }
+
+        // Populate skill filter dropdown
+        function populateSkillFilter(projects) {
+            const filter = document.getElementById('skill-filter');
+            const allSkills = [...new Set(projects.flatMap(p => p.skills))].sort();
+            allSkills.forEach(skill => {
+                const option = document.createElement('option');
+                option.value = skill;
+                option.textContent = skill;
+                filter.appendChild(option);
+            });
+        }
+
+        // Search + Filter functionality
+        const searchBox = document.getElementById('search-box');
+        const skillFilter = document.getElementById('skill-filter');
+
+        searchBox.addEventListener('input', applyFilters);
+        skillFilter.addEventListener('change', applyFilters);
+
+        function applyFilters() {
+            const searchText = searchBox.value.toLowerCase();
+            const selectedSkill = skillFilter.value;
+
+            const filtered = projectsData.filter(project => {
+                const matchesSearch = project.title.toLowerCase().includes(searchText) ||
+                    project.description.toLowerCase().includes(searchText);
+                const matchesSkill = selectedSkill ? project.skills.includes(selectedSkill) : true;
+                return matchesSearch && matchesSkill;
+            });
+
+            renderProjects(filtered);
+        }
+    </script>
+
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/components.js"></script>
+    <script src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

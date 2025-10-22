@@ -1,0 +1,128 @@
+<!-- <section id="certifications" class="projects-section">
+    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+    <p>Explore all my professional certifications and courses 🎓</p> -->
+
+    <!-- Search + Filter -->
+    <!-- <div class="projects-filters">
+        <input type="text" id="cert-search-box" placeholder="Search certifications...">
+        <select id="cert-category-filter">
+            <option value="">Filter by category</option>
+        </select>
+    </div> -->
+
+    <!-- Certifications Grid -->
+    <!-- <div id="certifications-container" class="projects-container"></div> -->
+
+    <!-- <a href="./index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a> -->
+<!-- </section> -->
+
+
+<section id="certifications" class="projects-section">
+    <h2><i class="fas fa-certificate"></i> Certifications</h2>
+    <p>Explore all my professional certifications and courses 🎓</p>
+
+    <!-- Certifications Grid -->
+    <div id="certifications-container" class="projects-container"></div>
+
+    <!-- Show All Button -->
+    <!-- <div style="text-align:center; margin-top:20px;">
+        <button id="show-all-certs" class="back-btn" style="display:inline-block;">
+            <i class="fas fa-plus-circle"></i> Show All
+        </button>
+    </div> -->
+</section>
+
+<style>
+.projects-section {
+    padding: 80px 20px;
+    background: #050b18;
+    color: #fff;
+    text-align: center;
+}
+
+.projects-section h2 {
+    font-size: 2rem;
+    color: #00ffc8;
+    margin-bottom: 10px;
+}
+
+.projects-section p {
+    font-size: 1rem;
+    color: #b0b0b0;
+    margin-bottom: 30px;
+}
+
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: #0a0f1f;
+    color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+.project-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.project-card .project-details {
+    padding: 15px;
+}
+
+.project-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #1d79e9;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.project-card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.project-card .project-skills span {
+    display: inline-block;
+    background: #1e293b;
+    color: #00ffc8;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 3px;
+    font-size: 0.85rem;
+}
+
+.back-btn {
+    margin-top: 20px;
+    display: inline-block;
+    background: #00ffc8;
+    color: #000;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #1d79e9;
+    color: #fff;
+}
+</style>
+

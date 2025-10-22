@@ -1,0 +1,104 @@
+<!-- components/experience.html -->
+<section id="experience" class="experience-section">
+  <h2><i class="fas fa-briefcase"></i> Experience Timeline</h2>
+  <p>My professional experiences, internships, and projects in a roadmap style 👨‍💻</p>
+
+  <div class="timeline-container">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-laptop-code"></i></div>
+        <div class="timeline-content">
+          <h3>DevOps Engineer Intern</h3>
+          <span class="company">Tech Solutions Pvt Ltd</span>
+          <span class="duration">Jan 2024 – Jun 2024</span>
+          <span class="location">Dholpur, India</span>
+          <span class="work-type">Full-time Internship</span>
+          <p>Worked on CI/CD pipelines, Docker automation, and AWS deployments.</p>
+          <ul class="responsibilities">
+            <li>Implemented automated deployment pipelines using Jenkins and Docker.</li>
+            <li>Managed AWS services including EC2, S3, Lambda for project deployment.</li>
+            <li>Optimized system performance and reduced deployment time by 30%.</li>
+          </ul>
+          <div class="skills-used">
+            <strong>Skills:</strong>
+            <span>DevOps</span>
+            <span>Docker</span>
+            <span>Jenkins</span>
+            <span>AWS</span>
+            <span>Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="timeline-content">
+          <h3>Cybersecurity Trainee</h3>
+          <span class="company">CyberSecure Labs</span>
+          <span class="duration">Jul 2023 – Dec 2023</span>
+          <span class="location">Jaipur, India</span>
+          <span class="work-type">Part-time Internship</span>
+          <p>Learned and applied vulnerability assessment, penetration testing, and network security.</p>
+          <ul class="responsibilities">
+            <li>Performed penetration testing on client networks and systems.</li>
+            <li>Used tools like Nmap, Metasploit, and Burp Suite for security assessment.</li>
+            <li>Prepared detailed vulnerability reports with remediation suggestions.</li>
+          </ul>
+          <div class="skills-used">
+            <strong>Skills:</strong>
+            <span>Cybersecurity</span>
+            <span>Penetration Testing</span>
+            <span>Network Security</span>
+            <span>Python</span>
+            <span>Linux</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-icon"><i class="fas fa-robot"></i></div>
+        <div class="timeline-content">
+          <h3>IoT & AI Intern</h3>
+          <span class="company">Innovate Tech Labs</span>
+          <span class="duration">Jan 2023 – Jun 2023</span>
+          <span class="location">Jaipur, India</span>
+          <span class="work-type">Full-time Internship</span>
+          <p>Developed IoT prototypes and AI/ML models for smart home and automation projects.</p>
+          <ul class="responsibilities">
+            <li>Built smart IoT devices using Raspberry Pi and Arduino.</li>
+            <li>Implemented ML models for home automation using Python and TensorFlow.</li>
+            <li>Collaborated with a team of 5 interns to deliver a final working prototype.</li>
+          </ul>
+          <div class="skills-used">
+            <strong>Skills:</strong>
+            <span>IoT</span>
+            <span>Raspberry Pi</span>
+            <span>Arduino</span>
+            <span>Python</span>
+            <span>TensorFlow</span>
+            <span>AI/ML</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+<script>
+const items = document.querySelectorAll('.timeline-item');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+items.forEach(item => observer.observe(item));
+</script>

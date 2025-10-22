@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk Hero Demo</title>
+  <style>
+    /* ---------------- Base Styles ---------------- */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background-color: #0a0f1f;
+      color: #fff;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      color: #00ffc3;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ffc3;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    .typing-text span {
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .btn-neon {
+      background: linear-gradient(135deg, #00ffc3, #00bcd4);
+      box-shadow: 0 0 10px #00ffc3, 0 0 20px #00bcd4;
+    }
+
+    .btn-neon-outline {
+      border: 2px solid #ff00ff;
+      color: #ff00ff;
+      background: transparent;
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    .hero-image img {
+      width: 200px;
+      border-radius: 50%;
+      border: 4px solid #00ffc3;
+      box-shadow: 0 0 20px #00ffc3;
+      margin-top: 20px;
+    }
+
+    .hero-social {
+      margin-top: 20px;
+    }
+
+    .hero-social a {
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      margin: 0 10px;
+      border-radius: 50%;
+      background: rgba(0,255,195,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #00ffc3;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .hero-social a:hover {
+      background: #00ffc3;
+      color: #000;
+      transform: scale(1.2);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Canvas for background -->
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- Hero Content -->
+  <div class="hero-content">
+    <h1>Hi, I'm <span>Aashoo Sharma</span></h1>
+    <p>I am a <span class="typing-text"></span></p>
+    <div class="hero-buttons">
+      <a href="#about" class="btn btn-neon">About Me</a>
+      <a href="#projects" class="btn btn-neon-outline">My Work</a>
+    </div>
+    <div class="hero-social">
+      <a href="#" target="_blank"><i class="fab fa-github"></i>G</a>
+      <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i>L</a>
+      <a href="#" target="_blank"><i class="fab fa-twitter"></i>T</a>
+      <a href="#" target="_blank"><i class="fab fa-instagram"></i>I</a>
+    </div>
+    <div class="hero-image">
+      <img src="./assets/images/profile.jpg" alt="Aashoo Sharma">
+    </div>
+  </div>
+
+  <!-- <script>
+    // ---------------- Canvas Setup ----------------
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // ---------------- Particles ----------------
+    const particleCount = 80;
+    const particles = [];
+
+    for(let i=0;i<particleCount;i++){
+      particles.push({
+        x: Math.random()*width,
+        y: Math.random()*height,
+        vx: (Math.random()-0.5)*1,
+        vy: (Math.random()-0.5)*1,
+        size: Math.random()*2+1
+      });
+    }
+
+    // ---------------- Matrix Code ----------------
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+      // Semi-transparent bg
+      ctx.fillStyle = "rgba(10,15,31,0.3)";
+      ctx.fillRect(0,0,width,height);
+
+      // Draw matrix letters
+      ctx.fillStyle = "#00ff00";
+      ctx.font = fontSize + "px monospace";
+      for(let i=0;i<drops.length;i++){
+        const text = letters.charAt(Math.floor(Math.random()*letters.length));
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        // drops[i]++;
+        drops[i] += 0.1; // 0.3 = slow, jitna chahoge adjust karo
+
+        if(drops[i]*fontSize>height && Math.random()>0.975) drops[i]=0;
+      }
+
+      // Draw particles
+      particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+        ctx.fillStyle = "rgba(0,255,195,0.7)";
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x<0)p.x=width;
+        if(p.x>width)p.x=0;
+        if(p.y<0)p.y=height;
+        if(p.y>height)p.y=0;
+      });
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    // ---------------- Typing Effect ----------------
+    const typingText = document.querySelector(".typing-text");
+    const roles = [
+      {text:"DevOps Engineer", color:"#1d79e9"},
+      {text:"AI/ML Enthusiast", color:"#daff1f"},
+      {text:"Cybersecurity Expert", color:"#ff0000"}
+    ];
+    let index=0;
+    let charIndex=0;
+    let typing=true;
+    const typingDelay=120;
+    const eraseDelay=50;
+
+    function typeRole(){
+      const currentRole = roles[index];
+      if(typing){
+        typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0,charIndex+1)}</span>`;
+        charIndex++;
+        if(charIndex===currentRole.text.length){
+          typing=false;
+          setTimeout(typeRole,1500);
+          return;
+        }
+      } else {
+        charIndex--;
+        typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0,charIndex)}</span>`;
+        if(charIndex===0){
+          typing=true;
+          index=(index+1)%roles.length;
+        }
+      }
+      setTimeout(typeRole,typing?typingDelay:eraseDelay);
+    }
+    typeRole();
+
+    // ---------------- Mouse Interaction ----------------
+    window.addEventListener("mousemove",(e)=>{
+      const mx = e.clientX;
+      const my = e.clientY;
+      particles.forEach(p=>{
+        const dx = mx-p.x;
+        const dy = my-p.y;
+        const dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist<100){
+          p.x -= dx*0.002;
+          p.y -= dy*0.002;
+        }
+      });
+    });
+  </script> -->
+
+  <!-- <script>
+  // ---------------- Canvas Setup ----------------
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // ---------------- Particles ----------------
+  const particleCount = 80;
+  const particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 1,
+      vy: (Math.random() - 0.5) * 1,
+      size: Math.random() * 2 + 1
+    });
+  }
+
+  // ---------------- Matrix Code ----------------
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const fontSize = 16;
+  const columns = Math.floor(width / fontSize);
+  const drops = Array(columns).fill(0);
+  const trailLength = 15; // number of letters per column
+
+  function drawMatrix() {
+    // Semi-transparent bg
+    ctx.fillStyle = "rgba(10,15,31,0.3)";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.font = fontSize + "px monospace";
+
+    // Draw matrix letters with trails
+    for (let i = 0; i < columns; i++) {
+      for (let j = 0; j < trailLength; j++) {
+        const yPos = drops[i] - j;
+        const alpha = 1 - j / trailLength; // fading trail
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillStyle = `rgba(0,255,0,${alpha})`;
+        ctx.fillText(text, i * fontSize, yPos * fontSize);
+      }
+      drops[i] += 0.1; // drop speed, adjust to make slower/faster
+      if (drops[i] > height / fontSize + trailLength) {
+        drops[i] = Math.random() * -20;
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,255,195,0.7)";
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = width;
+      if (p.x > width) p.x = 0;
+      if (p.y < 0) p.y = height;
+      if (p.y > height) p.y = 0;
+    });
+
+    requestAnimationFrame(drawMatrix);
+  }
+  drawMatrix();
+
+  // ---------------- Typing Effect ----------------
+  const typingText = document.querySelector(".typing-text");
+  const roles = [
+    { text: "DevOps Engineer", color: "#1d79e9" },
+    { text: "AI/ML Enthusiast", color: "#daff1f" },
+    { text: "Cybersecurity Expert", color: "#ff0000" }
+  ];
+  let index = 0;
+  let charIndex = 0;
+  let typing = true;
+  const typingDelay = 120;
+  const eraseDelay = 50;
+
+  function typeRole() {
+    if (!typingText) return;
+    const currentRole = roles[index];
+    if (typing) {
+      typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0, charIndex + 1)}</span>`;
+      charIndex++;
+      if (charIndex === currentRole.text.length) {
+        typing = false;
+        setTimeout(typeRole, 1500);
+        return;
+      }
+    } else {
+      charIndex--;
+      typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0, charIndex)}</span>`;
+      if (charIndex === 0) {
+        typing = true;
+        index = (index + 1) % roles.length;
+      }
+    }
+    setTimeout(typeRole, typing ? typingDelay : eraseDelay);
+  }
+  typeRole();
+
+  // ---------------- Mouse Interaction ----------------
+  window.addEventListener("mousemove", (e) => {
+    const mx = e.clientX;
+    const my = e.clientY;
+    particles.forEach(p => {
+      const dx = mx - p.x;
+      const dy = my - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 100) {
+        p.x -= dx * 0.002;
+        p.y -= dy * 0.002;
+      }
+    });
+  });
+</script> -->
+
+<script>
+  // ---------------- Canvas Setup ----------------
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+
+  // ---------------- Particles ----------------
+  const particleCount = 80;
+  const particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 1,
+      vy: (Math.random() - 0.5) * 1,
+      size: Math.random() * 2 + 1
+    });
+  }
+
+  // ---------------- Matrix Code ----------------
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const fontSize = 16;
+  const columns = Math.floor(width / fontSize);
+  const drops = Array.from({length: columns}, () => Math.random() * -20); // random start
+  const trailLength = 15;
+  const linesPerColumn = 4 + Math.floor(Math.random() * 2); // 4-5 lines
+
+  function drawMatrix() {
+    // Semi-transparent background
+    ctx.fillStyle = "rgba(10,15,31,0.3)";
+    ctx.fillRect(0, 0, width, height);
+    ctx.font = fontSize + "px monospace";
+
+    // Draw matrix letters with multiple lines per column
+    for (let i = 0; i < columns; i++) {
+      for (let j = 0; j < linesPerColumn; j++) {
+        for (let k = 0; k < trailLength; k++) {
+          const yPos = drops[i] - k + j;
+          const alpha = 1 - k / trailLength;
+          const text = letters.charAt(Math.floor(Math.random() * letters.length));
+          ctx.fillStyle = `rgba(0,255,0,${alpha})`;
+          ctx.fillText(text, i * fontSize, yPos * fontSize);
+        }
+      }
+      drops[i] += 0.1; // drop speed
+      if (drops[i] > height / fontSize + trailLength) {
+        drops[i] = Math.random() * -20; // reset with stagger
+      }
+    }
+
+    // Draw particles
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,255,195,0.7)";
+      ctx.fill();
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = width;
+      if (p.x > width) p.x = 0;
+      if (p.y < 0) p.y = height;
+      if (p.y > height) p.y = 0;
+    });
+
+    requestAnimationFrame(drawMatrix);
+  }
+  drawMatrix();
+
+  // ---------------- Typing Effect ----------------
+  const typingText = document.querySelector(".typing-text");
+  const roles = [
+    { text: "DevOps Engineer", color: "#1d79e9" },
+    { text: "AI/ML Enthusiast", color: "#daff1f" },
+    { text: "Cybersecurity Expert", color: "#ff0000" }
+  ];
+  let index = 0;
+  let charIndex = 0;
+  let typing = true;
+  const typingDelay = 120;
+  const eraseDelay = 50;
+
+  function typeRole() {
+    if (!typingText) return;
+    const currentRole = roles[index];
+    if (typing) {
+      typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0, charIndex + 1)}</span>`;
+      charIndex++;
+      if (charIndex === currentRole.text.length) {
+        typing = false;
+        setTimeout(typeRole, 1500);
+        return;
+      }
+    } else {
+      charIndex--;
+      typingText.innerHTML = `<span style="color:${currentRole.color}">${currentRole.text.substring(0, charIndex)}</span>`;
+      if (charIndex === 0) {
+        typing = true;
+        index = (index + 1) % roles.length;
+      }
+    }
+    setTimeout(typeRole, typing ? typingDelay : eraseDelay);
+  }
+  typeRole();
+
+  // ---------------- Mouse Interaction ----------------
+  window.addEventListener("mousemove", (e) => {
+    const mx = e.clientX;
+    const my = e.clientY;
+    particles.forEach(p => {
+      const dx = mx - p.x;
+      const dy = my - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        p.x -= dx*0.002;
+        p.y -= dy*0.002;
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
