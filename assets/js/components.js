@@ -343,26 +343,263 @@ fetch('./components/about.html')
   });
 
 
+
+// ===========================
+// Load Services Section
+// ===========================
+fetch('./components/services.html')
+  .then(res => res.text())
+  .then(data => {
+    const placeholder = document.getElementById('services-placeholder');
+    if (placeholder) placeholder.innerHTML = data;
+    loadServices(); // call after HTML loaded
+  })
+  .catch(err => console.error('❌ Error loading services section:', err));
+
+let servicesData = [];
+
+// Load services from JSON
+function loadServices() {
+  fetch('./data/services.json')
+    .then(res => res.json())
+    .then(data => {
+      servicesData = data;
+      renderServices();
+    })
+    .catch(err => console.error('❌ Error loading services JSON:', err));
+}
+
+// Render services dynamically
+function renderServices() {
+  const container = document.getElementById('services-container');
+  if (!container) return;
+
+  container.innerHTML = ''; // clear previous content
+
+  servicesData.forEach(service => {
+    const card = document.createElement('div');
+    card.classList.add('neon-card', 'p-6', 'rounded-xl', 'text-white', 'transition', 'transform', 'hover:-translate-y-1');
+
+    card.innerHTML = `
+      <div class="service-emoji text-5xl mb-4">${service.emoji || '🛠️'}</div>
+      <h3 class="text-xl font-semibold text-teal-300 mb-2">${service.title}</h3>
+      <p class="text-sm text-gray-300 mb-4">${service.description}</p>
+      <div class="flex justify-between items-center">
+        <span class="text-green-400 font-semibold text-lg">${service.price}</span>
+        <a href="${service.link}" class="btn-neon text-sm">Book Now</a>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+  
+// // ===========================
+// // Load Skills Section
+// // ===========================
+// fetch('./components/skills.html')
+//   .then(res => res.text())
+//   .then(data => {
+//     document.getElementById('skills-placeholder').innerHTML = data;
+//   });
+
+
+// function toggleSkills() {
+//   const extra = document.querySelector('.extra-skills');
+//   const btn = document.querySelector('.show-more-btn');
+//   extra.classList.toggle('show');
+//   btn.textContent = extra.classList.contains('show') ? 'Show Less' : 'Show All';
+// }
+
 // ===========================
 // Load Skills Section
 // ===========================
 fetch('./components/skills.html')
   .then(res => res.text())
   .then(data => {
-    document.getElementById('skills-placeholder').innerHTML = data;
+    const placeholder = document.getElementById('skills-placeholder');
+    if (placeholder) placeholder.innerHTML = data;
+    loadSkills(); // call after HTML loaded
+  })
+  .catch(err => console.error('❌ Error loading skills section:', err));
+
+let skillsData = [];
+
+// Load skills from JSON
+function loadSkills() {
+  fetch('./data/skills.json')
+    .then(res => res.json())
+    .then(data => {
+      skillsData = data;
+      renderSkills();
+    })
+    .catch(err => console.error('❌ Error loading skills JSON:', err));
+}
+
+// Render all skills in one grid
+function renderSkills() {
+  const container = document.getElementById('skills-container');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  skillsData.forEach((skill, index) => {
+    const card = document.createElement('div');
+    card.classList.add('skill-card');
+    card.innerHTML = `<img src="${skill.icon}" alt="${skill.name}" title="${skill.name}">`;
+
+    // Add a data attribute for extra skills (after 8)
+    if (index >= 8) card.classList.add('extra-skill', 'hidden');
+
+    container.appendChild(card);
+  });
+}
+
+// Toggle Show All / Show Less
+function toggleSkills() {
+  const btn = document.getElementById('toggleSkillsBtn');
+  const extraSkills = document.querySelectorAll('.extra-skill');
+
+  const isHidden = extraSkills[0]?.classList.contains('hidden');
+
+  extraSkills.forEach(skill => {
+    skill.classList.toggle('hidden', !isHidden);
   });
 
-
-function toggleSkills() {
-  const extra = document.querySelector('.extra-skills');
-  const btn = document.querySelector('.show-more-btn');
-  extra.classList.toggle('show');
-  btn.textContent = extra.classList.contains('show') ? 'Show Less' : 'Show All';
+  btn.textContent = isHidden ? 'Show Less' : 'Show All';
 }
 
 
 
+// ===========================
+// Load Education Section (HTML Component)
+// ===========================
+fetch('./components/education.html')
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to load education.html (${res.status})`);
+    return res.text();
+  })
+  .then(data => {
+    const placeholder = document.getElementById('education-placeholder');
+    if (placeholder) placeholder.innerHTML = data;
+  })
+  .catch(err => console.error('❌ Error loading education section:', err));
 
+
+// ===========================
+// Load Education Data (From JSON)
+// ===========================
+fetch('./data/education.json')
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to load education.json (${res.status})`);
+    return res.json();
+  })
+  .then(educationData => {
+    const container = document.getElementById('education-timeline');
+    if (!container) return;
+
+    // educationData.forEach(edu => {
+    //   const item = document.createElement('div');
+    //   item.classList.add('timeline-item');
+
+    //   item.innerHTML = `
+    //     <div class="timeline-icon"><i class="fas fa-school"></i></div>
+    //     <div class="timeline-content">
+    //       <img src="${edu.image || './assets/img/default-edu.jpg'}" alt="${edu.institution}" class="edu-image" />
+    //       <h3>${edu.degree}</h3>
+    //       <span class="organization">${edu.institution}</span>
+    //       <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
+    //       <p>${edu.description || ''}</p>
+    //       ${edu.grade ? `<p class="grade">Grade: ${edu.grade}</p>` : ''}
+    //       ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+    //     </div>
+    //   `;
+
+    //   container.appendChild(item);
+    // });
+
+    // educationData.forEach(edu => {
+    //   const item = document.createElement('div');
+    //   item.classList.add('timeline-item');
+
+    //   item.innerHTML = `
+    //     <div class="timeline-icon"><i class="fas fa-school"></i></div>
+    //     <div class="timeline-content">
+    //       <div class="edu-header">
+    //         <img src="${edu.image || './assets/img/default-edu.jpg'}" 
+    //             alt="${edu.institution}" 
+    //             class="edu-image" />
+    //         <div class="edu-details">
+    //           <h3>${edu.degree}</h3>
+    //           <span class="organization">${edu.institution}</span>
+    //           <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
+    //           ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+    //         </div>
+    //       </div>
+
+    //       <div class="edu-body">
+    //         ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
+    //         ${edu.grade ? `<p><strong>Grade / CGPA:</strong> ${edu.grade}</p>` : ''}
+    //         ${edu.activities ? `<p><strong>Activities & Societies:</strong> ${edu.activities}</p>` : ''}
+    //         ${edu.subjects ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` : ''}
+    //         ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
+    //         <p>${edu.description || ''}</p>
+    //       </div>
+    //     </div>
+    //   `;
+
+    //   container.appendChild(item);
+    // });
+
+    educationData.forEach(edu => {
+      const item = document.createElement('div');
+      item.classList.add('timeline-item');
+      item.classList.add('timeline-item2');
+
+      item.innerHTML = `
+        <div class="timeline-icon"><i class="fas fa-school"></i></div>
+        <div class="timeline-content">
+          <div class="edu-header">
+            <img src="${edu.image || './assets/img/default-edu.jpg'}" 
+                alt="${edu.institution}" 
+                class="edu-image" />
+            <div class="edu-details">
+              <h3>${edu.degree}</h3>
+              <span class="organization">${edu.institution}</span>
+              <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
+              ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+            </div>
+          </div>
+
+          <div class="edu-body">
+            ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
+            ${edu.grade ? `<p><strong>Grade:</strong> ${edu.grade}</p>` : ''}
+            ${edu.activities ? `<p><strong>Activities:</strong> ${edu.activities}</p>` : ''}
+            ${edu.subjects && edu.subjects.length 
+              ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` 
+              : ''}
+            ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
+            ${edu.description ? `<p>${edu.description}</p>` : ''}
+          </div>
+        </div>
+      `;
+
+      container.appendChild(item);
+    });
+
+
+    // Scroll animation
+    const items = document.querySelectorAll('.timeline-item');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+
+    items.forEach(item => observer.observe(item));
+  })
+  .catch(err => console.error('❌ Error loading education JSON:', err));
 
 
 
@@ -497,18 +734,85 @@ fetch('./data/projects.json')
 
 
 
-  // ===========================
+//   // ===========================
+// // Load Experience Section
+// // ===========================
+// fetch('./components/experience.html')
+//   .then(res => res.text())
+//   .then(data => {
+//     const placeholder = document.getElementById('experience-placeholder');
+//     if (placeholder) placeholder.innerHTML = data;
+//   })
+//   .catch(err => console.error('❌ Error loading experience section:', err));
+
+  
+// ===========================
 // Load Experience Section
 // ===========================
 fetch('./components/experience.html')
   .then(res => res.text())
   .then(data => {
     const placeholder = document.getElementById('experience-placeholder');
-    if (placeholder) placeholder.innerHTML = data;
+    if(placeholder) placeholder.innerHTML = data;
+    loadExperience(); // call after HTML loaded
   })
   .catch(err => console.error('❌ Error loading experience section:', err));
 
-  
+let experienceData = [];
+
+function loadExperience() {
+  fetch('./data/experience.json')
+    .then(res => res.json())
+    .then(data => {
+      experienceData = data;
+      renderExperience();
+      initObserver();
+    })
+    .catch(err => console.error('❌ Error loading experience JSON:', err));
+}
+
+function renderExperience() {
+  const container = document.getElementById('experience-timeline');
+  if(!container) return;
+  container.innerHTML = '';
+
+  experienceData.forEach(exp => {
+    const item = document.createElement('div');
+    item.classList.add('timeline-item');
+    item.classList.add('timeline-item2');
+
+
+    item.innerHTML = `
+      <div class="timeline-icon"><i class="${exp.icon}"></i></div>
+      <div class="timeline-content">
+        <h3>${exp.title}</h3>
+        <span class="company">${exp.company}</span>
+        <span class="duration">${exp.duration}</span>
+        ${exp.location ? `<span class="location">${exp.location}</span>` : ''}
+        ${exp.workType ? `<span class="work-type">${exp.workType}</span>` : ''}
+        <p>${exp.description}</p>
+        ${exp.responsibilities ? `<ul class="responsibilities">${exp.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul>` : ''}
+        ${exp.skills ? `<div class="skills-used"><strong>Skills:</strong> ${exp.skills.map(s => `<span>${s}</span>`).join('')}</div>` : ''}
+      </div>
+    `;
+
+    container.appendChild(item);
+  });
+}
+
+// Intersection Observer for animation
+function initObserver() {
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach(item => observer.observe(item));
+}
 
 
 
@@ -688,7 +992,7 @@ fetch('./data/certificates.json')
   })
   .then(certificates => {
     certificationsData = certificates;
-    renderCertifications(certificationsData.slice(0, 6)); // show first 6 by default
+    renderCertifications(certificationsData.slice(0, 8)); // show first 6 by default
     addShowAllButton();
   })
   .catch(err => console.error('❌ Error loading certifications JSON:', err));
@@ -708,12 +1012,13 @@ function renderCertifications(certifications) {
       card.classList.add('project-card');
 
       card.innerHTML = `
+        <div class="cert-name">${cert.name}</div>
         <img src="./assets/images/certificates/${cert.image}" alt="${cert.fullName}" onerror="this.src='./assets/images/fallback.png';">
         <div class="project-details">
           <h3><i class="fas fa-certificate"></i> ${cert.fullName || cert.name}</h3>
           <p class="organization"><strong>Organization:</strong> ${cert.issuingOrganization || 'N/A'}</p>
           <p class="duration"><strong>Issued:</strong> ${cert.issueDate || 'N/A'} ${cert.expirationDate ? `- Expires: ${cert.expirationDate}` : ''}</p>
-          ${cert.credentialsURL ? `<p><a href="${cert.credentialsURL}" target="_blank">View Certificate</a></p>` : ''}
+          ${cert.credentialsURL ? `<p><a class="btn-primary" href="${cert.credentialsURL}" target="_blank"><i class="fa-solid fa-eye"></i> View Certificate</a></p>` : ''}
           <div class="project-skills">
             ${(cert.skills || []).map(skill => `<span>${skill}</span>`).join('')}
           </div>
@@ -747,7 +1052,7 @@ function addShowAllButton() {
       btn.textContent = 'Show Less';
       showingAll = true;
     } else {
-      renderCertifications(certificationsData.slice(0, 6));
+      renderCertifications(certificationsData.slice(0, 8));
       btn.textContent = 'Show All';
       showingAll = false;
     }

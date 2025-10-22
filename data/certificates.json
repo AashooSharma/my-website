@@ -66,7 +66,7 @@
     "issueDate": "2022-05-27",
     "expirationDate": "",
     "credentialsID": "6290808893915d54053637ec",
-    "credentialsURL": "",
+    "credentialsURL": "https://example.com/certificate6",
     "skills": ["Android Development", "Mobile App Development", "Java", "Kotlin"],
     "image": "certificate_6.jpg",
     "category": "android development"

@@ -1,0 +1,98 @@
+[
+  {
+    "degree": "Bachelor of Technology (B.Tech)",
+    "field": "Computer Science and Engineering (Specialization in AI, IoT & DevOps)",
+    "institution": "Poornima College of Engineering, Jaipur",
+    "location": "Jaipur, Rajasthan, India",
+    "startYear": "2022",
+    "endYear": "2026",
+    "grade": "CGPA: 8.7 / 10 (Till 5th Semester)",
+    "image": "./assets/images/educat/collage2.jpg",
+    "activities": [
+      "AI Club Member and Hackathon Mentor",
+      "IoT Project Lead and Research Coordinator",
+      "Worked on automation systems integrating AI with IoT",
+      "Active participant in coding competitions and DevOps workshops"
+    ],
+    "subjects": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Internet of Things (IoT)",
+      "Cloud Computing",
+      "Cybersecurity",
+      "Data Structures and Algorithms"
+    ],
+    "skills": [
+      "Python",
+      "Docker",
+      "AWS",
+      "DevOps",
+      "Cybersecurity",
+      "AI/ML",
+      "IoT",
+      "Linux Administration"
+    ],
+    "achievements": [
+      "Winner – Smart India Hackathon 2024 (AI-Based Problem Statement)",
+      "Developed personal Jarvis-style AI Assistant",
+      "Built emotional AI Chatbot 'AI Girlfriend' using LLMs",
+      "Created Docker-based CI/CD Pipelines deployed on AWS"
+    ],
+    "projects": [
+      "AI Assistant using Python and OpenAI API",
+      "IoT-based Smart Home Automation System",
+      "DevOps Pipeline Automation using Docker and GitHub Actions"
+    ],
+    "certifications": [
+      "AWS Cloud Practitioner Essentials",
+      "DevOps Foundations by LinkedIn Learning",
+      "Ethical Hacking Essentials (EC-Council)"
+    ],
+    "description": "Focused on AI, IoT, and Cloud technologies with practical exposure to DevOps workflows and intelligent automation systems."
+  },
+  {
+    "degree": "Diploma in Electronics Engineering",
+    "field": "Electronics and Communication",
+    "institution": "Government Polytechnic College, Ajmer",
+    "location": "Ajmer, Rajasthan, India",
+    "startYear": "2019",
+    "endYear": "2022",
+    "grade": "Percentage: 84%",
+    "image": "./assets/images/educat/collage.jpg",
+    "activities": [
+      "Robotics Club Member and IoT Prototype Developer",
+      "Led team in final-year project: Smart Home IoT System",
+      "Worked on embedded circuits, sensors, and PCB design"
+    ],
+    "subjects": [
+      "Microcontrollers",
+      "Digital Electronics",
+      "Sensors & Transducers",
+      "Communication Systems",
+      "Arduino Programming"
+    ],
+    "skills": [
+      "Arduino",
+      "Circuit Design",
+      "IoT Integration",
+      "C Programming",
+      "Embedded Systems",
+      "Sensor Networks"
+    ],
+    "achievements": [
+      "Top 5 in State-Level Project Expo 2021",
+      "Awarded 'Best Innovative Project' by college faculty",
+      "Completed Industrial Training as DevOps Intern"
+    ],
+    "projects": [
+      "Smart Home Automation using Arduino",
+      "IoT Gas Leakage Detection System",
+      "Water Level Controller Circuit"
+    ],
+    "certifications": [
+      "Introduction to IoT by Cisco Networking Academy",
+      "Embedded Systems Design by NPTEL"
+    ],
+    "description": "Built strong technical foundation in electronics, automation, and IoT systems with hands-on project leadership and real-world innovation."
+  }
+]

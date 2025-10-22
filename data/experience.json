@@ -1,0 +1,47 @@
+[
+  {
+    "icon": "fas fa-laptop-code",
+    "title": "DevOps Engineer Intern",
+    "company": "Tech Solutions Pvt Ltd",
+    "duration": "Jan 2024 – Jun 2024",
+    "location": "Dholpur, India",
+    "workType": "Full-time Internship",
+    "description": "Worked on CI/CD pipelines, Docker automation, and AWS deployments.",
+    "responsibilities": [
+      "Implemented automated deployment pipelines using Jenkins and Docker.",
+      "Managed AWS services including EC2, S3, Lambda for project deployment.",
+      "Optimized system performance and reduced deployment time by 30%."
+    ],
+    "skills": ["DevOps", "Docker", "Jenkins", "AWS", "Python"]
+  },
+  {
+    "icon": "fas fa-shield-alt",
+    "title": "Cybersecurity Trainee",
+    "company": "CyberSecure Labs",
+    "duration": "Jul 2023 – Dec 2023",
+    "location": "Jaipur, India",
+    "workType": "Part-time Internship",
+    "description": "Learned and applied vulnerability assessment, penetration testing, and network security.",
+    "responsibilities": [
+      "Performed penetration testing on client networks and systems.",
+      "Used tools like Nmap, Metasploit, and Burp Suite for security assessment.",
+      "Prepared detailed vulnerability reports with remediation suggestions."
+    ],
+    "skills": ["Cybersecurity", "Penetration Testing", "Network Security", "Python", "Linux"]
+  },
+  {
+    "icon": "fas fa-robot",
+    "title": "IoT & AI Intern",
+    "company": "Innovate Tech Labs",
+    "duration": "Jan 2023 – Jun 2023",
+    "location": "Jaipur, India",
+    "workType": "Full-time Internship",
+    "description": "Developed IoT prototypes and AI/ML models for smart home and automation projects.",
+    "responsibilities": [
+      "Built smart IoT devices using Raspberry Pi and Arduino.",
+      "Implemented ML models for home automation using Python and TensorFlow.",
+      "Collaborated with a team of 5 interns to deliver a final working prototype."
+    ],
+    "skills": ["IoT", "Raspberry Pi", "Arduino", "Python", "TensorFlow", "AI/ML"]
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "emoji": "🤖",
+    "title": "AI Chatbot Development",
+    "description": "Build a custom AI chatbot using Python or Node.js with OpenAI, NLP, and real-time chat integration.",
+    "price": "₹1499",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=chatbot"
+  },
+  {
+    "emoji": "♾️",
+    "title": "DevOps Project Setup",
+    "description": "CI/CD pipeline setup with GitHub Actions, Docker, Kubernetes and AWS deployment included.",
+    "price": "₹999",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=devops"
+  },
+  {
+    "emoji": "🛡️",
+    "title": "Cybersecurity Audit",
+    "description": "Perform penetration testing, vulnerability scanning, and security best practices check for websites or APIs.",
+    "price": "₹499",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=cyber"
+  },
+  {
+    "emoji": "📡",
+    "title": "IoT Project Help",
+    "description": "Support for Arduino, NodeMCU, ESP32, sensor integration, and cloud dashboards.",
+    "price": "₹399",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=iot"
+  },
+  {
+    "emoji": "🌐",
+    "title": "Personal Portfolio Website",
+    "description": "Responsive Tailwind-based portfolio built for tech profiles, deployed on Netlify or GitHub Pages.",
+    "price": "₹999",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=portfolio"
+  },
+  {
+    "emoji": "📞",
+    "title": "1-on-1 Mentorship Call",
+    "description": "30-min call for career guidance in DevOps, Cybersecurity, AI/ML, or IoT. Get clarity + roadmap.",
+    "price": "₹199",
+    "link": "https://service-marketplace-eight.vercel.app/order?service=mentorship"
+  }
+]
