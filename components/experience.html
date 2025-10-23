@@ -284,8 +284,9 @@ items.forEach(item => observer.observe(item));
 #experience-timeline::before {
   content: '';
   position: absolute;
-  left: 20;
+  left: 20px;
   top: 0;
+  top: -25px;
   width: 4px;
   height: 100%;
   background: #00ffc8;
@@ -345,6 +346,8 @@ items.forEach(item => observer.observe(item));
   display: flex;
   background: #1e293b;
   background: #0a0f1f;
+  left: -5vw;
+  width: 120%;
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -356,6 +359,14 @@ items.forEach(item => observer.observe(item));
   box-shadow: 0 12px 25px rgba(56, 189, 248, 0.4);
 }
 
+
+@media (max-width: 1200px) {
+  .timeline-item2 {
+    width: 90vw;
+    padding-right: 40px;
+  }
+  
+}
 /* .timeline-item {
   position: relative;
   margin-bottom: 50px;

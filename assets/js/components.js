@@ -132,10 +132,10 @@ fetch("./components/navbar.html")
       });
 
       // Close navbar on link click (mobile)
-      const navLinks = navbar.querySelectorAll("ul li a");
+      const navLinks = navbar.querySelectorAll("ul li");
       navLinks.forEach((link) => {
         link.addEventListener("click", () => {
-          if (window.innerWidth <= 768) {
+          if (window.innerWidth <= 1425) {
             navbar.classList.remove("active");
           }
         });

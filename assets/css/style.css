@@ -75,7 +75,7 @@ h2 {
   width: 400px;
   border-radius: 50%;
   border: 4px solid #00ffc3;
-  margin-right: 10vw;
+  margin-right: 5vw;
 }
 
 /* About Section */
@@ -162,4 +162,26 @@ h2 {
 
 .contact button:hover {
   transform: scale(1.05);
+}
+
+/* .icon-ashacker:before{
+  color: #000000;
+  background: #00ffc3;
+  border: 2px solid black;
+} */
+.icon-ashacker:before {
+  color: #000; /* icon ka color */
+  background: linear-gradient(150deg, #3CC9DA, #49A9C1, #A73CA4, #811ED9, #3CC9DA, #3CC9DA, #3CC9DA); /* rainbow gradient */
+  border: 2px solid #000;
+  border-radius: 8px; /* thoda rounded */
+  /* padding: 5px; */
+  display: inline-block;
+  transition: 0.5s all ease;
+}
+
+/* Hover effect for extra pop */
+.icon-ashacker:before:hover {
+  background: linear-gradient(45deg, #00ffcc, #ff00ff, #ff0066, #ffff00, #00ff00, #0066ff);
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 0 15px #fff;
 }
