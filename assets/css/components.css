@@ -492,6 +492,23 @@ header nav ul li a.active {
   color: #c0c0c0;
 }
 
+.about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #1d79e9;
+}
+
+.about-content h2 i {
+  margin-right: 10px;
+  color: #00ffc8;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
+}
+
 .about-info {
   list-style: none;
   padding: 0;
@@ -533,13 +550,13 @@ header nav ul li a.active {
     gap: 30px;
   }
 
-  .about-content h2 {
+  /* .about-content h2 {
     font-size: 2rem;
-  }
+  } */
 
-  .about-content h3 {
+  /* .about-content h3 {
     font-size: 1.3rem;
-  }
+  } */
 }
 h3 {
   font-size: 1.5rem;
@@ -589,9 +606,9 @@ h3 {
   transform: translateX(5px);
 }
 
-h2 span {
+/* h2 span {
   color: #fff;
-}
+} */
 
 
 
@@ -908,6 +925,23 @@ h2 span {
   margin-bottom: 40px;
 }
 
+.skills-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #1d79e9;
+}
+
+.skills-section h2 i {
+  margin-right: 10px;
+  color: #00ffc8;
+}
+
+.skills-section p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
+}
+
 /* Grid layout */
 .skills-grid {
   display: flex;
@@ -1126,6 +1160,24 @@ h2 span {
   gap: 30px;
 }
 
+
+.timeline-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #1d79e9;
+}
+
+.timeline-section h2 i {
+  margin-right: 10px;
+  color: #00ffc8;
+}
+
+.timeline-section p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
+}
+
 /* Card View */
 .timeline-item {
   display: flex;
@@ -1222,10 +1274,10 @@ h2 span {
 .projects-section h2 {
   font-size: 2.3rem;
   color: #1d79e9;
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 10px; */
 }
 
 .projects-section h2 i {
@@ -1235,6 +1287,23 @@ h2 span {
 .projects-section p {
   color: #d0d0d0;
   margin-bottom: 40px;
+}
+
+.projects-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #1d79e9;
+}
+
+.projects-section h2 i {
+  margin-right: 10px;
+  color: #00ffc8;
+}
+
+.projects-section p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
 }
 
 .projects-container {

@@ -2,11 +2,11 @@
     <h2><i class="fas fa-envelope"></i> Contact Me</h2>
     <p>Have a question or want to work together? Send me a message! 📩</p>
 
-    <form id="contact-form" novalidate>
-        <input type="text" name="name" placeholder="Your Name" required 
+    <form id="contact-form" >
+        <input type="text" name="name" placeholder="Your Name" autocomplete="name" required 
                pattern="^[a-zA-Z\s]{2,50}$" title="Name should be 2-50 letters only">
-        <input type="email" name="email" placeholder="Your Email" required
-               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+        <input type="email" name="email" placeholder="Your Email" autocomplete="email" required
+               pattern="^[a-zA-Z0-9._%\-\+]+@[a-zA-Z0-9._\-]+\.[a-z]{2,}$"
                title="Enter a valid email address">
         <input type="text" name="number" placeholder="Your Phone Number" required
                pattern="^\+?\d{7,15}$" title="Enter valid phone number (7-15 digits)">
@@ -72,7 +72,7 @@
 }
 
 /* Input validation focus effect */
-.contact-section input:invalid,
+/* .contact-section input:invalid,
 .contact-section textarea:invalid {
     border-color: #ff4d6d;
 }
@@ -82,43 +82,52 @@
     outline: none;
     border-color: #1d79e9;
     box-shadow: 0 0 5px #1d79e9;
+} */
+
+
+/* Focused & invalid input only */
+.contact-section input:focus:invalid,
+.contact-section textarea:focus:invalid {
+  border-color: #ff4d6d;
+  box-shadow: 0 0 6px rgba(255, 77, 109, 0.8);
+}
+
+/* Normal focus valid or empty */
+.contact-section input:focus:valid,
+.contact-section textarea:focus:valid {
+  border-color: #1d79e9;
+  box-shadow: 0 0 6px #1d79e9;
+}
+
+/* Remove default outline */
+.contact-section input:focus,
+.contact-section textarea:focus {
+  outline: none;
+}
+
+
+</style>
+<style>
+
+    
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: #1d79e9;
+}
+
+.contact-section h2 i {
+  margin-right: 10px;
+  color: #00ffc8;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d0d0;
 }
 </style>
 
 <script>
-// ===========================
-// Contact Form Secure Submission
-// ===========================
-document.getElementById('contact-form')?.addEventListener('submit', function(e){
-    e.preventDefault();
 
-    const form = e.target;
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const number = form.number.value.trim();
-    const message = form.message.value.trim();
-
-    // Simple XSS prevention
-    const sanitize = str => str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
-    if(!name || !email || !number || !message){
-        alert('❌ Please fill all fields correctly!');
-        return;
-    }
-
-    // Prepare safe payload
-    const payload = {
-        name: sanitize(name),
-        email: sanitize(email),
-        number: sanitize(number),
-        message: sanitize(message)
-    };
-
-    console.log('✅ Secure Contact Form Data:', payload);
-
-    // TODO: Send payload to backend via fetch/AJAX securely
-    alert('Message sent successfully! 🎉');
-
-    form.reset();
-});
 </script>

@@ -1064,6 +1064,58 @@ function addShowAllButton() {
 
 
 
+// // ===========================
+// // Load Contact Section (HTML Component)
+// // ===========================
+// fetch('./components/contact.html')
+//   .then(res => res.text())
+//   .then(data => {
+//     const placeholder = document.getElementById('contact-placeholder');
+//     if (placeholder) placeholder.innerHTML = data;
+//   })
+//   .catch(err => console.error('❌ Error loading contact section:', err));
+
+
+
+
+// // ===========================
+// // Contact Form Secure Submission
+// // ===========================
+// document.getElementById('contact-form')?.addEventListener('submit', function(e){
+//     e.preventDefault();
+
+//     const form = e.target;
+//     const name = form.name.value.trim();
+//     const email = form.email.value.trim();
+//     const number = form.number.value.trim();
+//     const message = form.message.value.trim();
+
+//     // Simple XSS prevention
+//     const sanitize = str => str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+//     if(!name || !email || !number || !message){
+//         alert('❌ Please fill all fields correctly!');
+//         return;
+//     }
+
+//     // Prepare safe payload
+//     const payload = {
+//         name: sanitize(name),
+//         email: sanitize(email),
+//         number: sanitize(number),
+//         message: sanitize(message)
+//     };
+
+//     console.log('✅ Secure Contact Form Data:', payload);
+
+//     // TODO: Send payload to backend via fetch/AJAX securely
+//     alert('Message sent successfully! 🎉');
+
+//     form.reset();
+// });
+
+
+
 // ===========================
 // Load Contact Section (HTML Component)
 // ===========================
@@ -1071,6 +1123,46 @@ fetch('./components/contact.html')
   .then(res => res.text())
   .then(data => {
     const placeholder = document.getElementById('contact-placeholder');
-    if (placeholder) placeholder.innerHTML = data;
+    if (placeholder) {
+      placeholder.innerHTML = data;
+
+      // ===========================
+      // Contact Form Secure Submission (initialized after HTML loads)
+      // ===========================
+      const form = document.getElementById('contact-form');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          const number = form.number.value.trim();
+          const message = form.message.value.trim();
+
+          // Simple XSS prevention
+          const sanitize = str => str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+          if (!name || !email || !number || !message) {
+            alert('❌ Please fill all fields correctly!');
+            return;
+          }
+
+          // Prepare safe payload
+          const payload = {
+            name: sanitize(name),
+            email: sanitize(email),
+            number: sanitize(number),
+            message: sanitize(message)
+          };
+
+          console.log('✅ Secure Contact Form Data:', payload);
+
+          // Simulate success alert
+          alert('Message sent successfully! 🎉');
+
+          form.reset();
+        });
+      }
+    }
   })
   .catch(err => console.error('❌ Error loading contact section:', err));
