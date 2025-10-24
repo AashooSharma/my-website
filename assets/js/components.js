@@ -484,150 +484,150 @@ function toggleSkills() {
 }
 
 
-// ===========================
-// Load Education Section (HTML Component)
-// ===========================
-fetch('./components/education.html')
-  .then(res => {
-    if (!res.ok) throw new Error(`Failed to load education.html (${res.status})`);
-    return res.text();
-  })
-  .then(data => {
-    const placeholder = document.getElementById('education-placeholder');
-    if (placeholder) placeholder.innerHTML = data;
-  })
-  .catch(err => console.error('❌ Error loading education section:', err));
+// // ===========================
+// // Load Education Section (HTML Component)
+// // ===========================
+// fetch('./components/education.html')
+//   .then(res => {
+//     if (!res.ok) throw new Error(`Failed to load education.html (${res.status})`);
+//     return res.text();
+//   })
+//   .then(data => {
+//     const placeholder = document.getElementById('education-placeholder');
+//     if (placeholder) placeholder.innerHTML = data;
+//   })
+//   .catch(err => console.error('❌ Error loading education section:', err));
 
-
-// ===========================
-// Load Education Data (From JSON)
-// ===========================
-fetch('./data/education.json')
-  .then(res => {
-    if (!res.ok) throw new Error(`Failed to load education.json (${res.status})`);
-    return res.json();
-  })
-  .then(educationData => {
-    const container = document.getElementById('education-timeline');
-    if (!container) return;
-
-    educationData.forEach(edu => {
-      const item = document.createElement('div');
-      item.classList.add('timeline-item');
-      item.classList.add('timeline-item2');
-
-      item.innerHTML = `
-        <div class="timeline-icon"><i class="fas fa-school"></i></div>
-        <div class="timeline-content">
-          <div class="edu-header">
-            <img src="${edu.image || './assets/img/default-edu.jpg'}" 
-                alt="${edu.institution}" 
-                class="edu-image" />
-            <div class="edu-details">
-              <h3>${edu.degree}</h3>
-              <span class="organization">${edu.institution}</span>
-              <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
-              ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
-            </div>
-          </div>
-
-          <div class="edu-body">
-            ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
-            ${edu.grade ? `<p><strong>Grade:</strong> ${edu.grade}</p>` : ''}
-            ${edu.activities ? `<p><strong>Activities:</strong> ${edu.activities}</p>` : ''}
-            ${edu.subjects && edu.subjects.length 
-              ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` 
-              : ''}
-            ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
-            ${edu.description ? `<p>${edu.description}</p>` : ''}
-          </div>
-        </div>
-      `;
-
-      container.appendChild(item);
-    });
-
-
-    // Scroll animation
-    const items = document.querySelectorAll('.timeline-item');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.2 });
-
-    items.forEach(item => observer.observe(item));
-  })
-  .catch(err => console.error('❌ Error loading education JSON:', err));
 
 // // ===========================
-// // Load Education Section + Data
+// // Load Education Data (From JSON)
 // // ===========================
-// loadSection('education-placeholder', './components/education.html', () => {
-//   loadEducationData(); // call JSON loader after HTML injected
-// });
+// fetch('./data/education.json')
+//   .then(res => {
+//     if (!res.ok) throw new Error(`Failed to load education.json (${res.status})`);
+//     return res.json();
+//   })
+//   .then(educationData => {
+//     const container = document.getElementById('education-timeline');
+//     if (!container) return;
 
-// function loadEducationData() {
-//   fetch('./data/education.json')
-//     .then(res => res.json())
-//     .then(educationData => {
-//       renderEducation(educationData);
-//       initEducationObserver();
-//     })
-//     .catch(err => console.error('❌ Error loading education JSON:', err));
-// }
+//     educationData.forEach(edu => {
+//       const item = document.createElement('div');
+//       item.classList.add('timeline-item');
+//       item.classList.add('timeline-item2');
 
-// // Render Education Timeline
-// function renderEducation(educationData) {
-//   const container = document.getElementById('education-timeline');
-//   if (!container) return;
+//       item.innerHTML = `
+//         <div class="timeline-icon"><i class="fas fa-school"></i></div>
+//         <div class="timeline-content">
+//           <div class="edu-header">
+//             <img src="${edu.image || './assets/img/default-edu.jpg'}" 
+//                 alt="${edu.institution}" 
+//                 class="edu-image" />
+//             <div class="edu-details">
+//               <h3>${edu.degree}</h3>
+//               <span class="organization">${edu.institution}</span>
+//               <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
+//               ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+//             </div>
+//           </div>
 
-//   container.innerHTML = '';
-
-//   educationData.forEach(edu => {
-//     const item = document.createElement('div');
-//     item.classList.add('timeline-item', 'timeline-item2');
-
-//     item.innerHTML = `
-//       <div class="timeline-icon"><i class="fas fa-school"></i></div>
-//       <div class="timeline-content">
-//         <div class="edu-header">
-//           <img src="${edu.image || './assets/img/default-edu.jpg'}" 
-//                alt="${edu.institution}" class="edu-image" />
-//           <div class="edu-details">
-//             <h3>${edu.degree}</h3>
-//             <span class="organization">${edu.institution}</span>
-//             <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
-//             ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+//           <div class="edu-body">
+//             ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
+//             ${edu.grade ? `<p><strong>Grade:</strong> ${edu.grade}</p>` : ''}
+//             ${edu.activities ? `<p><strong>Activities:</strong> ${edu.activities}</p>` : ''}
+//             ${edu.subjects && edu.subjects.length 
+//               ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` 
+//               : ''}
+//             ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
+//             ${edu.description ? `<p>${edu.description}</p>` : ''}
 //           </div>
 //         </div>
+//       `;
 
-//         <div class="edu-body">
-//           ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
-//           ${edu.grade ? `<p><strong>Grade:</strong> ${edu.grade}</p>` : ''}
-//           ${edu.activities ? `<p><strong>Activities:</strong> ${edu.activities}</p>` : ''}
-//           ${edu.subjects?.length ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` : ''}
-//           ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
-//           ${edu.description ? `<p>${edu.description}</p>` : ''}
-//         </div>
-//       </div>
-//     `;
-
-//     container.appendChild(item);
-//   });
-// }
-
-// // Intersection Observer for scroll animation
-// function initEducationObserver() {
-//   const items = document.querySelectorAll('.timeline-item');
-//   const observer = new IntersectionObserver(entries => {
-//     entries.forEach(entry => {
-//       if (entry.isIntersecting) entry.target.classList.add('visible');
+//       container.appendChild(item);
 //     });
-//   }, { threshold: 0.2 });
 
-//   items.forEach(item => observer.observe(item));
-// }
+
+//     // Scroll animation
+//     const items = document.querySelectorAll('.timeline-item');
+//     const observer = new IntersectionObserver(entries => {
+//       entries.forEach(entry => {
+//         if (entry.isIntersecting) entry.target.classList.add('visible');
+//       });
+//     }, { threshold: 0.2 });
+
+//     items.forEach(item => observer.observe(item));
+//   })
+//   .catch(err => console.error('❌ Error loading education JSON:', err));
+
+// ===========================
+// Load Education Section + Data
+// ===========================
+loadSection('education-placeholder', './components/education.html', () => {
+  loadEducationData(); // call JSON loader after HTML injected
+});
+
+function loadEducationData() {
+  fetch('./data/education.json')
+    .then(res => res.json())
+    .then(educationData => {
+      renderEducation(educationData);
+      initEducationObserver();
+    })
+    .catch(err => console.error('❌ Error loading education JSON:', err));
+}
+
+// Render Education Timeline
+function renderEducation(educationData) {
+  const container = document.getElementById('education-timeline');
+  if (!container) return;
+
+  container.innerHTML = '';
+
+  educationData.forEach(edu => {
+    const item = document.createElement('div');
+    item.classList.add('timeline-item', 'timeline-item2');
+
+    item.innerHTML = `
+      <div class="timeline-icon"><i class="fas fa-school"></i></div>
+      <div class="timeline-content">
+        <div class="edu-header">
+          <img src="${edu.image || './assets/img/default-edu.jpg'}" 
+               alt="${edu.institution}" class="edu-image" />
+          <div class="edu-details">
+            <h3>${edu.degree}</h3>
+            <span class="organization">${edu.institution}</span>
+            <span class="duration">${edu.startYear} - ${edu.endYear || 'Present'}</span>
+            ${edu.location ? `<p class="location"><i class="fas fa-map-marker-alt"></i> ${edu.location}</p>` : ''}
+          </div>
+        </div>
+
+        <div class="edu-body">
+          ${edu.field ? `<p><strong>Field of Study:</strong> ${edu.field}</p>` : ''}
+          ${edu.grade ? `<p><strong>Grade:</strong> ${edu.grade}</p>` : ''}
+          ${edu.activities ? `<p><strong>Activities:</strong> ${edu.activities}</p>` : ''}
+          ${edu.subjects?.length ? `<p><strong>Key Subjects:</strong> ${edu.subjects.join(', ')}</p>` : ''}
+          ${edu.achievements ? `<p><strong>Achievements:</strong> ${edu.achievements}</p>` : ''}
+          ${edu.description ? `<p>${edu.description}</p>` : ''}
+        </div>
+      </div>
+    `;
+
+    container.appendChild(item);
+  });
+}
+
+// Intersection Observer for scroll animation
+function initEducationObserver() {
+  const items = document.querySelectorAll('.timeline-item');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.2 });
+
+  items.forEach(item => observer.observe(item));
+}
 
 
 
